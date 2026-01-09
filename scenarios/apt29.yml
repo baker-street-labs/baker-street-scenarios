@@ -1,0 +1,86 @@
+# APT29 (Cozy Bear) Attack Simulation
+# Advanced Persistent Threat scenario
+
+name: apt29
+description: "APT29 (Cozy Bear) attack simulation - multi-stage campaign"
+version: "1.0"
+duration: 4h
+intensity: high
+
+stages:
+  - name: reconnaissance
+    duration: 30m
+    vendors:
+      snort:
+        events_per_hour: 500
+        signatures:
+          - port_scan
+          - host_discovery
+          - service_enumeration
+      zeek:
+        events_per_hour: 800
+        log_types:
+          - conn
+          - dns
+          
+  - name: initial_compromise
+    duration: 15m
+    vendors:
+      fortinet:
+        events_per_hour: 200
+        event_types:
+          - ips
+          - virus
+        actions:
+          - block: 80%
+          - pass: 20%
+      crowdstrike:
+        events_per_hour: 100
+        detections:
+          - suspicious_powershell
+          - malicious_document
+          
+  - name: lateral_movement
+    duration: 1h
+    vendors:
+      ossec:
+        events_per_hour: 300
+        categories:
+          - "Authentication Events"
+          - "System Security"
+      cisco:
+        events_per_hour: 400
+        event_types:
+          - vpn_login
+          - smb_traffic
+          
+  - name: data_exfiltration
+    duration: 2h
+    vendors:
+      zeek:
+        events_per_hour: 600
+        log_types:
+          - http
+          - files
+          - ssl
+      fortinet:
+        events_per_hour: 300
+        event_types:
+          - dnsfilter
+          - webfilter
+
+# IOC generation for EDL
+generate_iocs: true
+ioc_types:
+  - ip_addresses
+  - domains
+  - file_hashes
+
+# Alert webhooks
+webhooks:
+  - url: http://soar.bakerstreetlabs.local/webhook/apt29
+    events:
+      - stage_start
+      - stage_complete
+      - high_severity_alert
+

@@ -1,0 +1,275 @@
+{
+  "theme": "SherlockHolmes",
+  "domains": {
+    "platform": "platform.bakerstreetlabs.io",
+    "xdr": "moriartyxdr.ad.bakerstreetlabs.io",
+    "xsiam": "moriartysiam.ad.bakerstreetlabs.io",
+    "agentix": "moriartyagentix.ad.bakerstreetlabs.io"
+  },
+  "fakeNames": [
+    "Sherlock Holmes",
+    "Dr. John Watson",
+    "Irene Adler",
+    "Professor Moriarty",
+    "Mycroft Holmes",
+    "Inspector Lestrade",
+    "Mrs. Hudson",
+    "Mary Morstan",
+    "Sebastian Moran",
+    "Charles Augustus Milverton",
+    "Tobias Gregson",
+    "Athelney Jones",
+    "Stanley Hopkins",
+    "James Ryder",
+    "Euros Holmes",
+    "Victor Trevor",
+    "Colonel Sebastian Moran",
+    "Inspector Bradstreet",
+    "Mrs. Turner",
+    "Soames"
+  ],
+  "fakeJobTitles": [
+    "Consulting Detective",
+    "Forensic Analyst",
+    "Inspector",
+    "Criminal Investigator",
+    "Intelligence Officer",
+    "Baker Street Irregular",
+    "Scotland Yard Detective",
+    "Diogenes Club Analyst",
+    "Reichenbach Specialist",
+    "Victorian Era Security Expert",
+    "Criminal Mastermind",
+    "Military Intelligence Officer",
+    "Landlady",
+    "Forensic Pathologist",
+    "Criminal Network Operator"
+  ],
+  "fakeDepartments": [
+    "Baker Street Irregulars",
+    "Scotland Yard",
+    "Diogenes Club",
+    "Reichenbach Division",
+    "Victorian Security",
+    "Moriarty Network Ops",
+    "Hudson Support Services",
+    "Criminal Investigations",
+    "Intelligence Services",
+    "Forensic Division"
+  ],
+  "fakeStreetAddresses": [
+    "Fake 221B Baker Street",
+    "Fake 3 Lauriston Gardens",
+    "Fake Reichenbach Falls Road",
+    "Fake Appledore Towers Lane",
+    "Fake Baskerville Hall Drive",
+    "Fake Musgrave Ritual Court",
+    "Fake Copper Beeches Way",
+    "Fake Speckled Band Lane",
+    "Fake Red-Headed League Avenue",
+    "Fake Scandal in Bohemia Street"
+  ],
+  "fakeCities": [
+    "London",
+    "Sussex",
+    "Dartmoor",
+    "Reichenbach",
+    "Baskerville",
+    "Devon",
+    "Norfolk",
+    "Surrey"
+  ],
+  "fakeStates": [
+    "Greater London",
+    "East Sussex",
+    "Devon",
+    "Norfolk",
+    "Surrey"
+  ],
+  "fakeZipCodes": [
+    "55501-GB",
+    "55502-GB",
+    "55503-GB",
+    "55504-GB",
+    "55505-GB",
+    "55506-GB",
+    "55507-GB",
+    "55508-GB"
+  ],
+  "fakeOffices": [
+    "221B - Upstairs",
+    "Scotland Yard - Floor 2",
+    "Diogenes Club - Lounge",
+    "Baker Street - Study",
+    "Reichenbach - Observation Post",
+    "Baskerville - Estate Office",
+    "Mycroft's Office - Whitehall"
+  ],
+  "fakeServiceOffices": [
+    "Data Center - Primary",
+    "Data Center - Secondary",
+    "Server Farm - Building A",
+    "Server Farm - Building B",
+    "Infrastructure Operations",
+    "Network Operations Center"
+  ],
+  "fakeCompany": "Baker Street Labs - Holmes Division",
+  "users": {
+    "admins": [
+      {
+        "sam": "da_admin",
+        "name": "Sherlock Holmes",
+        "password": "Cortex1!",
+        "groups": ["Domain Admins"],
+        "description": "Domain Admin - Master Detective"
+      },
+      {
+        "sam": "it_admin1",
+        "name": "Inspector Lestrade",
+        "password": "Cortex1!",
+        "groups": ["Administrators"],
+        "description": "IT Admin - Yard Inspector"
+      },
+      {
+        "sam": "it_admin2",
+        "name": "Mycroft Holmes",
+        "password": "Cortex1!",
+        "groups": ["Administrators"],
+        "description": "IT Admin - Government Liaison"
+      }
+    ],
+    "service": [
+      {
+        "sam": "svc_sql",
+        "name": "Professor Moriarty",
+        "password": "SQLService2024!",
+        "spn": ["MSSQLSvc/sqlserver.{domain}:1433"],
+        "description": "SQL Service Account - Criminal Mastermind"
+      },
+      {
+        "sam": "svc_web",
+        "name": "Irene Adler",
+        "password": "WebApp2024!",
+        "spn": ["HTTP/webapp.{domain}"],
+        "description": "Web Service Account - The Woman"
+      },
+      {
+        "sam": "svc_iis",
+        "name": "Sebastian Moran",
+        "password": "IISService2024!",
+        "spn": ["HTTP/iis.{domain}"],
+        "description": "IIS Service Account - Tiger Hunter"
+      },
+      {
+        "sam": "svc_sharepoint",
+        "name": "Charles Augustus Milverton",
+        "password": "SharePoint2024!",
+        "spn": ["HTTP/sharepoint.{domain}"],
+        "description": "SharePoint Service Account - Blackmailer",
+        "optional": true
+      }
+    ],
+    "standard": [
+      {
+        "sam": "jwatson",
+        "name": "Dr. John Watson",
+        "password": "BakerStreet221B!",
+        "weak": true
+      },
+      {
+        "sam": "mmorstan",
+        "name": "Mary Morstan",
+        "password": "BakerStreet221B!",
+        "weak": true
+      },
+      {
+        "sam": "sholmes",
+        "name": "Sherlock Holmes",
+        "password": "Reichenbach123!",
+        "weak": false
+      },
+      {
+        "sam": "ihudson",
+        "name": "Mrs. Hudson",
+        "password": "BakerStreet123!",
+        "weak": false
+      },
+      {
+        "sam": "ltrevor",
+        "name": "Victor Trevor",
+        "password": "Trevor2024!",
+        "weak": false
+      },
+      {
+        "sam": "bgregson",
+        "name": "Inspector Bradstreet",
+        "password": "Yard2024!",
+        "weak": false
+      },
+      {
+        "sam": "mturner",
+        "name": "Mrs. Turner",
+        "password": "Turner2024!",
+        "weak": false
+      },
+      {
+        "sam": "ssoames",
+        "name": "Soames",
+        "password": "Soames2024!",
+        "weak": false
+      },
+      {
+        "sam": "jhopkins",
+        "name": "Stanley Hopkins",
+        "password": "Hopkins2024!",
+        "weak": false
+      },
+      {
+        "sam": "jryder",
+        "name": "James Ryder",
+        "password": "Ryder2024!",
+        "weak": false
+      }
+    ],
+    "roastable": [
+      {
+        "sam": "nopreauth1",
+        "name": "Tobias Gregson",
+        "password": "NoPreAuth2024!",
+        "preauth": false,
+        "description": "AS-REP Roastable Account - Yard Inspector"
+      },
+      {
+        "sam": "nopreauth2",
+        "name": "Athelney Jones",
+        "password": "NoPreAuth2024!",
+        "preauth": false,
+        "description": "AS-REP Roastable Account - Scotland Yard"
+      },
+      {
+        "sam": "nopreauth3",
+        "name": "Stanley Hopkins",
+        "password": "NoPreAuth2024!",
+        "preauth": false,
+        "description": "AS-REP Roastable Account - Detective"
+      }
+    ],
+    "insider": [
+      {
+        "sam": "insider",
+        "name": "James Ryder",
+        "password": "Cortex1!",
+        "description": "Compromised Insider Account - Starting point for attacks"
+      }
+    ],
+    "target": [
+      {
+        "sam": "targetuser",
+        "name": "Euros Holmes",
+        "password": "TargetUser2024!",
+        "description": "Target Account for Shadow Credentials attack"
+      }
+    ]
+  }
+}
+

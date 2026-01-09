@@ -1,0 +1,81 @@
+# Baseline Traffic Scenario
+# Normal day-to-day security events
+
+name: baseline
+description: "Standard baseline traffic for normal operations"
+version: "1.0"
+duration: 24h
+
+vendors:
+  fortinet:
+    enabled: true
+    events_per_hour: 1200
+    severity_distribution:
+      low: 50%
+      medium: 30%
+      high: 15%
+      critical: 5%
+    event_types:
+      - utm
+      - ips
+      - webfilter
+      - dnsfilter
+      
+  ossec:
+    enabled: true
+    events_per_hour: 800
+    categories:
+      - "File Integrity Monitoring"
+      - "Log Analysis"
+      - "Authentication Events"
+    
+  snort:
+    enabled: true
+    events_per_hour: 1500
+    rule_categories:
+      - emerging-threats
+      - community
+      
+  zeek:
+    enabled: true
+    events_per_hour: 1000
+    log_types:
+      - conn
+      - dns
+      - http
+      - ssl
+      
+  cisco:
+    enabled: true
+    events_per_hour: 1100
+    device_type: asa
+    
+time_patterns:
+  business_hours:
+    start: "08:00"
+    end: "18:00"
+    days: [Mon, Tue, Wed, Thu, Fri]
+    multiplier: 2.0  # 2x events during business hours
+    
+  overnight:
+    start: "22:00"
+    end: "06:00"
+    multiplier: 0.2  # 20% of baseline overnight
+    
+  weekend:
+    days: [Sat, Sun]
+    multiplier: 0.5  # 50% on weekends
+
+network:
+  source_ips:
+    - 172.16.10.0/24
+    - 192.168.100.0/24
+  destination_ips:
+    - 172.16.20.0/24
+    - 10.0.0.0/8
+  common_ports:
+    - 80
+    - 443
+    - 22
+    - 3389
+

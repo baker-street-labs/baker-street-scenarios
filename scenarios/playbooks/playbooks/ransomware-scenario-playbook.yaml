@@ -1,0 +1,163 @@
+apiVersion: baker-street-labs/v1
+kind: MultiVendorTrafficPlaybook
+metadata:
+  name: ransomware-scenario-playbook
+  description: "Ransomware attack scenario with realistic traffic patterns"
+  
+spec:
+  network_configuration:
+    name: "corporate-network-ransomware"
+    description: "Corporate network under ransomware attack"
+    
+    zones:
+      dmz:
+        name: "DMZ Zone"
+        subnet: "10.0.1.0/24"
+        devices:
+          - name: "web-server-01"
+            ip: "10.0.1.10"
+            vendor: "fortinet"
+            role: "web-server"
+          - name: "mail-server-01"
+            ip: "10.0.1.20"
+            vendor: "cisco"
+            role: "mail-server"
+      
+      internal:
+        name: "Internal Network"
+        subnet: "192.168.1.0/24"
+        devices:
+          - name: "fileserver-01"
+            ip: "192.168.1.10"
+            vendor: "crowdstrike"
+            role: "file-server"
+          - name: "workstation-01"
+            ip: "192.168.1.100"
+            vendor: "okta"
+            role: "user-workstation"
+          - name: "workstation-02"
+            ip: "192.168.1.101"
+            vendor: "fortinet"
+            role: "user-workstation"
+          - name: "workstation-03"
+            ip: "192.168.1.102"
+            vendor: "snort"
+            role: "user-workstation"
+      
+      management:
+        name: "Management Network"
+        subnet: "172.16.1.0/24"
+        devices:
+          - name: "admin-workstation-01"
+            ip: "172.16.1.10"
+            vendor: "cisco"
+            role: "admin-workstation"
+          - name: "backup-server-01"
+            ip: "172.16.1.20"
+            vendor: "suricata"
+            role: "backup-server"
+    
+    routing:
+      default_gateway: "10.0.1.1"
+      dns_servers: ["8.8.8.8", "8.8.4.4"]
+      internet_range: "0.0.0.0/0"
+    
+    services:
+      dhcp_server: "192.168.1.1"
+      dns_server: "192.168.1.2"
+      ntp_server: "192.168.1.3"
+      smtp_server: "10.0.1.20"
+      web_proxy: "192.168.1.5"
+  
+  traffic_configuration:
+    traffic_ratio:
+      normal: 85
+      malicious: 15
+    
+    vendor_distribution:
+      fortinet: 30
+      cisco: 20
+      crowdstrike: 25
+      okta: 10
+      snort: 10
+      suricata: 5
+    
+    time_distribution:
+      business_hours: 60
+      after_hours: 30
+      overnight: 10
+    
+    normal_traffic_patterns:
+      web_browsing:
+        frequency: 35
+        vendors: ["fortinet", "cisco"]
+        patterns:
+          - "HTTP/HTTPS to business sites"
+          - "Office 365/Google Workspace"
+          - "Video conferencing (Zoom/Teams)"
+          - "File sharing (OneDrive/Dropbox)"
+      
+      email_communication:
+        frequency: 20
+        vendors: ["cisco", "fortinet"]
+        patterns:
+          - "SMTP/IMAP traffic"
+          - "Email attachments"
+          - "Calendar synchronization"
+      
+      file_transfers:
+        frequency: 15
+        vendors: ["crowdstrike", "fortinet"]
+        patterns:
+          - "FTP/SFTP transfers"
+          - "SMB file sharing"
+          - "Cloud storage sync"
+      
+      authentication:
+        frequency: 10
+        vendors: ["okta", "crowdstrike"]
+        patterns:
+          - "SSO authentication"
+          - "MFA challenges"
+          - "Password resets"
+      
+      system_maintenance:
+        frequency: 5
+        vendors: ["crowdstrike", "fortinet"]
+        patterns:
+          - "Windows updates"
+          - "Antivirus updates"
+          - "System backups"
+    
+    malicious_traffic_patterns:
+      reconnaissance:
+        frequency: 5
+        vendors: ["snort", "suricata", "fortinet"]
+        patterns:
+          - "Port scanning"
+          - "Service enumeration"
+          - "Network mapping"
+      
+      initial_access:
+        frequency: 3
+        vendors: ["fortinet", "crowdstrike"]
+        patterns:
+          - "Phishing attempts"
+          - "Exploit attempts"
+          - "Credential stuffing"
+      
+      lateral_movement:
+        frequency: 4
+        vendors: ["snort", "suricata", "crowdstrike"]
+        patterns:
+          - "SMB exploitation"
+          - "RDP brute force"
+          - "Pass-the-hash attacks"
+      
+      data_exfiltration:
+        frequency: 3
+        vendors: ["fortinet", "cisco", "suricata"]
+        patterns:
+          - "Large data transfers"
+          - "Encrypted tunnels"
+          - "DNS tunneling" 

@@ -1,0 +1,228 @@
+# A Study in Scarlet - Investigation Scenario
+# MITRE ATT&CK: Initial Access, Privilege Escalation, Defense Evasion
+
+apiVersion: baker-street-labs/v1
+kind: InvestigationScenario
+metadata:
+  name: a-study-in-scarlet
+  namespace: baker-street-scenarios
+  labels:
+    app: investigation-scenario
+    project: baker-street-labs
+    difficulty: beginner
+    mitre-tactics:
+      - initial-access
+      - privilege-escalation
+      - defense-evasion
+      - discovery
+spec:
+  scenario:
+    title: "A Study in Scarlet"
+    description: |
+      A novice threat actor has gained initial access to a corporate network through a simple
+      vulnerability and is attempting to escalate privileges and establish persistence. The attacker
+      is using basic techniques but is learning and adapting as they progress through the network.
+      
+      Based on Arthur Conan Doyle's "A Study in Scarlet" - where Holmes and Watson first meet
+      and solve their first case together, this scenario represents the beginning of an investigation
+      and the learning process of both the attacker and the defenders.
+    
+    objectives:
+      - "Identify the initial attack vector"
+      - "Track privilege escalation attempts"
+      - "Detect defense evasion techniques"
+      - "Prevent further compromise"
+      - "Document the attack progression"
+    
+    duration: "2-3 hours"
+    difficulty: "Beginner"
+    participants: "1-3 investigators"
+  
+  mitre_attack:
+    tactics:
+      - TA0001: Initial Access
+      - TA0002: Execution
+      - TA0003: Persistence
+      - TA0004: Privilege Escalation
+      - TA0005: Defense Evasion
+      - TA0006: Credential Access
+      - TA0007: Discovery
+      - TA0008: Lateral Movement
+    
+    techniques:
+      - T1190: Exploit Public-Facing Application
+      - T1059: Command and Scripting Interpreter
+      - T1053: Scheduled Task/Job
+      - T1068: Exploitation for Privilege Escalation
+      - T1070: Indicator Removal on Host
+      - T1003: OS Credential Dumping
+      - T1083: File and Directory Discovery
+      - T1021: Remote Services
+    
+    procedures:
+      - "T1190: Exploit Public-Facing Application - Web application vulnerability"
+      - "T1059.001: PowerShell - Command execution via PowerShell"
+      - "T1053.005: Scheduled Task - Persistence via scheduled tasks"
+      - "T1068: Exploitation for Privilege Escalation - Local privilege escalation"
+      - "T1070.001: Clear Windows Event Logs - Defense evasion"
+      - "T1003.001: LSASS Memory - Credential dumping"
+  
+  targets:
+    windows:
+      - name: "web-server-01"
+        role: "Public Web Server"
+        vulnerabilities:
+          - "SQL injection vulnerability"
+          - "Weak authentication"
+          - "Default configurations"
+      
+      - name: "workstation-01"
+        role: "Compromised Workstation"
+        vulnerabilities:
+          - "Local privilege escalation vulnerability"
+          - "Weak endpoint protection"
+          - "Default user account"
+      
+      - name: "fileserver-01"
+        role: "File Server"
+        vulnerabilities:
+          - "Weak access controls"
+          - "Excessive file permissions"
+          - "Unpatched vulnerabilities"
+    
+    linux:
+      - name: "database-server-01"
+        role: "Database Server"
+        vulnerabilities:
+          - "Default database credentials"
+          - "Weak access controls"
+          - "Insufficient monitoring"
+    
+    network:
+      - name: "corporate-network"
+        role: "Corporate Network"
+        vulnerabilities:
+          - "Weak network segmentation"
+          - "Insufficient monitoring"
+          - "Default network policies"
+  
+  attackers:
+    red_teams:
+      - name: "scarlet-threat-actor"
+        tools:
+          - "Basic exploitation tools"
+          - "PowerShell scripts"
+          - "Custom persistence mechanisms"
+        techniques:
+          - "Web application exploitation"
+          - "Privilege escalation"
+          - "Defense evasion"
+    
+    malware:
+      - name: "basic-malware"
+        sophistication: "Low"
+        capabilities:
+          - "Basic persistence mechanisms"
+          - "Simple evasion techniques"
+          - "Credential harvesting"
+  
+  pan_products:
+    cortex_xdr:
+      - "Endpoint detection and response"
+      - "Behavioral analytics"
+      - "Threat hunting capabilities"
+    
+    pan_os:
+      - "Web application security"
+      - "Threat prevention"
+      - "Network traffic analysis"
+    
+    cortex_xsiam:
+      - "AI-powered security analytics"
+      - "Real-time threat detection"
+      - "Automated response"
+    
+    wildfire:
+      - "Malware analysis"
+      - "Threat intelligence"
+      - "Behavioral analysis"
+  
+  investigation_phases:
+    phase_1:
+      name: "Initial Access Analysis"
+      duration: "30 minutes"
+      objectives:
+        - "Identify the initial attack vector"
+        - "Analyze the vulnerability exploited"
+        - "Document the attack method"
+      tools:
+        - "PAN-OS for web application security"
+        - "Cortex XSIAM for correlation"
+        - "Vulnerability scanning tools"
+    
+    phase_2:
+      name: "Privilege Escalation Tracking"
+      duration: "1 hour"
+      objectives:
+        - "Track privilege escalation attempts"
+        - "Identify escalation techniques used"
+        - "Document attack progression"
+      tools:
+        - "Cortex XDR for endpoint analysis"
+        - "PAN-OS for network analysis"
+        - "Cortex XSIAM for correlation"
+    
+    phase_3:
+      name: "Defense Evasion Analysis"
+      duration: "30 minutes"
+      objectives:
+        - "Analyze defense evasion techniques"
+        - "Identify evasion methods used"
+        - "Document evasion patterns"
+      tools:
+        - "Cortex XDR for behavioral analysis"
+        - "PAN-OS for traffic analysis"
+        - "Cortex XSIAM for pattern recognition"
+    
+    phase_4:
+      name: "Containment and Recovery"
+      duration: "1 hour"
+      objectives:
+        - "Contain the threat"
+        - "Remove attacker access"
+        - "Secure compromised systems"
+      tools:
+        - "Cortex XDR for endpoint containment"
+        - "PAN-OS for network isolation"
+        - "Cortex XSIAM for automated response"
+  
+  success_metrics:
+    detection:
+      - "Detect initial access within 15 minutes"
+      - "Identify privilege escalation within 30 minutes"
+      - "Prevent 80% of defense evasion attempts"
+    
+    response:
+      - "Contain threat within 1 hour"
+      - "Remove all attacker access"
+      - "Secure all compromised systems"
+    
+    learning:
+      - "Document attack techniques used"
+      - "Identify security gaps"
+      - "Improve detection capabilities"
+  
+  debrief:
+    questions:
+      - "How quickly was the initial access detected?"
+      - "What privilege escalation techniques were used?"
+      - "How effective were the defense evasion techniques?"
+      - "What improvements are needed for detection?"
+      - "What lessons can be applied to real incidents?"
+    
+    recommendations:
+      - "Implement web application security controls"
+      - "Enhance privilege escalation detection"
+      - "Improve defense evasion detection"
+      - "Strengthen endpoint protection"
+      - "Conduct regular security assessments" 

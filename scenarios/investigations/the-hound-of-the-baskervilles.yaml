@@ -1,0 +1,240 @@
+# The Hound of the Baskervilles - Investigation Scenario
+# MITRE ATT&CK: Lateral Movement, Data Exfiltration, Persistence
+
+apiVersion: baker-street-labs/v1
+kind: InvestigationScenario
+metadata:
+  name: the-hound-of-the-baskervilles
+  namespace: baker-street-scenarios
+  labels:
+    app: investigation-scenario
+    project: baker-street-labs
+    difficulty: advanced
+    mitre-tactics:
+      - lateral-movement
+      - data-exfiltration
+      - persistence
+      - privilege-escalation
+spec:
+  scenario:
+    title: "The Hound of the Baskervilles"
+    description: |
+      A sophisticated APT group known as "The Hound" has infiltrated the Baskerville Corporation's network.
+      The attackers have established persistence across multiple systems and are systematically exfiltrating
+      sensitive data while maintaining stealth through living-off-the-land techniques.
+      
+      Based on Arthur Conan Doyle's "The Hound of the Baskervilles" - where a mysterious hound terrorizes
+      the Baskerville family, this scenario involves a stealthy threat that moves through the network like
+      a ghost, leaving minimal traces but causing significant damage.
+    
+    objectives:
+      - "Identify the initial attack vector and entry point"
+      - "Track lateral movement across the network"
+      - "Detect data exfiltration activities"
+      - "Eliminate persistence mechanisms"
+      - "Prevent further data loss"
+    
+    duration: "4-6 hours"
+    difficulty: "Advanced"
+    participants: "3-5 investigators"
+  
+  mitre_attack:
+    tactics:
+      - TA0001: Initial Access
+      - TA0003: Persistence
+      - TA0004: Privilege Escalation
+      - TA0007: Discovery
+      - TA0008: Lateral Movement
+      - TA0009: Collection
+      - TA0011: Command and Control
+      - TA0010: Exfiltration
+    
+    techniques:
+      - T1078: Valid Accounts
+      - T1053: Scheduled Task/Job
+      - T1055: Process Injection
+      - T1070: Indicator Removal on Host
+      - T1021: Remote Services
+      - T1041: Exfiltration Over C2 Channel
+      - T1071: Application Layer Protocol
+      - T1560: Archive Collected Data
+    
+    procedures:
+      - "T1078.001: Default Accounts - Attackers use default admin accounts"
+      - "T1053.005: Scheduled Task - Persistence via scheduled tasks"
+      - "T1055.001: Process Injection - Living-off-the-land techniques"
+      - "T1070.001: Clear Windows Event Logs - Stealth operations"
+      - "T1021.001: Remote Desktop Protocol - Lateral movement"
+      - "T1041.001: Exfiltration Over C2 Channel - Data exfiltration"
+  
+  targets:
+    windows:
+      - name: "baskerville-dc-01"
+        role: "Domain Controller"
+        vulnerabilities:
+          - "Weak password policies"
+          - "Default admin accounts"
+          - "Unpatched vulnerabilities"
+      
+      - name: "baskerville-fileserver-01"
+        role: "File Server"
+        vulnerabilities:
+          - "Excessive file permissions"
+          - "Unrestricted file sharing"
+          - "Weak authentication"
+      
+      - name: "baskerville-workstation-01"
+        role: "Executive Workstation"
+        vulnerabilities:
+          - "Privileged user account"
+          - "Sensitive data storage"
+          - "Weak endpoint protection"
+    
+    linux:
+      - name: "baskerville-web-01"
+        role: "Web Server"
+        vulnerabilities:
+          - "Outdated web applications"
+          - "Weak access controls"
+          - "Default configurations"
+    
+    network:
+      - name: "baskerville-network"
+        role: "Corporate Network"
+        vulnerabilities:
+          - "Weak network segmentation"
+          - "Insufficient monitoring"
+          - "Default network policies"
+  
+  attackers:
+    red_teams:
+      - name: "the-hound-apt"
+        tools:
+          - "Custom C2 framework"
+          - "Living-off-the-land tools"
+          - "Custom persistence mechanisms"
+        techniques:
+          - "Stealthy lateral movement"
+          - "Data collection and exfiltration"
+          - "Persistence establishment"
+    
+    apt_simulations:
+      - name: "baskerville-threat-actor"
+        sophistication: "High"
+        capabilities:
+          - "Advanced evasion techniques"
+          - "Custom malware development"
+          - "Social engineering expertise"
+  
+  pan_products:
+    cortex_xdr:
+      - "Endpoint detection and response"
+      - "Behavioral analytics"
+      - "Threat hunting capabilities"
+    
+    pan_os:
+      - "Network traffic analysis"
+      - "Threat prevention"
+      - "URL filtering"
+    
+    cortex_xsiam:
+      - "AI-powered security analytics"
+      - "Real-time threat detection"
+      - "Automated response"
+    
+    wildfire:
+      - "Malware analysis"
+      - "Threat intelligence"
+      - "Behavioral analysis"
+  
+  investigation_phases:
+    phase_1:
+      name: "Initial Discovery"
+      duration: "1 hour"
+      objectives:
+        - "Identify suspicious network activity"
+        - "Detect initial compromise indicators"
+        - "Establish investigation baseline"
+      tools:
+        - "Cortex XSIAM for initial detection"
+        - "PAN-OS for network analysis"
+        - "Cortex XDR for endpoint analysis"
+    
+    phase_2:
+      name: "Lateral Movement Tracking"
+      duration: "2 hours"
+      objectives:
+        - "Track attacker movement across network"
+        - "Identify compromised systems"
+        - "Map attack progression"
+      tools:
+        - "Cortex XDR for lateral movement detection"
+        - "PAN-OS for network traffic analysis"
+        - "Cortex XSIAM for correlation"
+    
+    phase_3:
+      name: "Data Exfiltration Analysis"
+      duration: "1 hour"
+      objectives:
+        - "Detect data exfiltration activities"
+        - "Identify stolen data types"
+        - "Prevent further data loss"
+      tools:
+        - "Cortex XSIAM for data flow analysis"
+        - "PAN-OS for exfiltration detection"
+        - "WildFire for malware analysis"
+    
+    phase_4:
+      name: "Persistence Elimination"
+      duration: "1 hour"
+      objectives:
+        - "Identify persistence mechanisms"
+        - "Remove attacker access"
+        - "Secure compromised systems"
+      tools:
+        - "Cortex XDR for persistence detection"
+        - "PAN-OS for network isolation"
+        - "Cortex XSIAM for automated response"
+    
+    phase_5:
+      name: "Recovery and Lessons Learned"
+      duration: "1 hour"
+      objectives:
+        - "Document investigation findings"
+        - "Implement security improvements"
+        - "Share lessons learned"
+      tools:
+        - "Cortex XSIAM for reporting"
+        - "Documentation tools"
+        - "Knowledge sharing platforms"
+  
+  success_metrics:
+    detection:
+      - "Detect initial compromise within 15 minutes"
+      - "Identify lateral movement within 30 minutes"
+      - "Prevent 90% of data exfiltration attempts"
+    
+    response:
+      - "Contain threat within 2 hours"
+      - "Eliminate all persistence mechanisms"
+      - "Restore affected systems within 4 hours"
+    
+    learning:
+      - "Document all attack techniques used"
+      - "Identify security gaps and improvements"
+      - "Share findings with security team"
+  
+  debrief:
+    questions:
+      - "How quickly was the initial compromise detected?"
+      - "What techniques were most effective for lateral movement?"
+      - "How well did PAN products detect the threat?"
+      - "What improvements are needed for future scenarios?"
+      - "What lessons can be applied to real-world incidents?"
+    
+    recommendations:
+      - "Implement stronger password policies"
+      - "Enhance network segmentation"
+      - "Improve endpoint monitoring"
+      - "Strengthen data protection measures"
+      - "Conduct regular security assessments" 

@@ -1,0 +1,4 @@
+"Range","System","NAT_IP","Port","User","Status","Hostname"
+"Range XDR","AD01","192.168.255.250","42425","xdr\administrator","FAILED",""
+"Range XSIAM","AD01","192.168.255.251","42425","xsiam\administrator","SUCCESS","rangexsiamad01"
+"Range Agentix","AD01","192.168.255.252","42425","agentix\administrator","FAILED",""

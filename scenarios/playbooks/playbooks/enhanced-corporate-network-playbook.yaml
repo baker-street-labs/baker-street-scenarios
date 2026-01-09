@@ -1,0 +1,269 @@
+apiVersion: baker-street-labs/v1
+kind: MultiVendorTrafficPlaybook
+metadata:
+  name: enhanced-corporate-network-playbook
+  description: "Enhanced corporate network with Lestrade integration for realistic user behavior"
+
+spec:
+  network_configuration:
+    name: "enhanced-corporate-network"
+    description: "Corporate network with realistic user behavior patterns and web traffic correlation"
+
+    zones:
+      dmz:
+        name: "DMZ Zone"
+        subnet: "10.0.1.0/24"
+        devices:
+          - name: "web-server-01"
+            ip: "10.0.1.10"
+            vendor: "fortinet"
+            role: "web-server"
+            user_profile: null  # Servers don't need user profiles
+            browser_type: null
+            operating_system: null
+          - name: "mail-server-01"
+            ip: "10.0.1.20"
+            vendor: "cisco"
+            role: "mail-server"
+            user_profile: null
+            browser_type: null
+            operating_system: null
+
+      internal:
+        name: "Internal Network"
+        subnet: "192.168.1.0/24"
+        devices:
+          - name: "workstation-01"
+            ip: "192.168.1.100"
+            vendor: "fortinet"
+            role: "user-workstation"
+            user_profile: "business_professional"
+            browser_type: "chrome"
+            operating_system: "windows"
+            browsing_patterns:
+              morning: ["business", "news", "finance"]
+              afternoon: ["business", "technology", "shopping"]
+              evening: ["entertainment", "news", "sports"]
+              weekend: ["entertainment", "shopping", "travel"]
+          - name: "workstation-02"
+            ip: "192.168.1.101"
+            vendor: "crowdstrike"
+            role: "user-workstation"
+            user_profile: "tech_enthusiast"
+            browser_type: "firefox"
+            operating_system: "linux"
+            browsing_patterns:
+              morning: ["technology", "news", "social_media"]
+              afternoon: ["technology", "gaming", "shopping"]
+              evening: ["gaming", "entertainment", "social_media"]
+              weekend: ["gaming", "technology", "entertainment"]
+          - name: "workstation-03"
+            ip: "192.168.1.102"
+            vendor: "okta"
+            role: "user-workstation"
+            user_profile: "student"
+            browser_type: "chrome"
+            operating_system: "macos"
+            browsing_patterns:
+              morning: ["education", "news", "social_media"]
+              afternoon: ["education", "technology", "shopping"]
+              evening: ["entertainment", "social_media", "gaming"]
+              weekend: ["entertainment", "social_media", "shopping"]
+          - name: "fileserver-01"
+            ip: "192.168.1.10"
+            vendor: "crowdstrike"
+            role: "file-server"
+            user_profile: null
+            browser_type: null
+            operating_system: null
+
+      management:
+        name: "Management Network"
+        subnet: "172.16.1.0/24"
+        devices:
+          - name: "admin-workstation-01"
+            ip: "172.16.1.10"
+            vendor: "cisco"
+            role: "admin-workstation"
+            user_profile: "business_professional"
+            browser_type: "chrome"
+            operating_system: "windows"
+            browsing_patterns:
+              morning: ["business", "news", "finance"]
+              afternoon: ["business", "technology", "shopping"]
+              evening: ["entertainment", "news", "sports"]
+              weekend: ["entertainment", "shopping", "travel"]
+          - name: "backup-server-01"
+            ip: "172.16.1.20"
+            vendor: "suricata"
+            role: "backup-server"
+            user_profile: null
+            browser_type: null
+            operating_system: null
+
+    routing:
+      default_gateway: "10.0.1.1"
+      dns_servers: ["8.8.8.8", "8.8.4.4"]
+      internet_range: "0.0.0.0/0"
+
+    services:
+      dhcp_server: "192.168.1.1"
+      dns_server: "192.168.1.2"
+      ntp_server: "192.168.1.3"
+      smtp_server: "10.0.1.20"
+      web_proxy: "192.168.1.5"
+
+  traffic_configuration:
+    traffic_ratio:
+      normal: 95
+      malicious: 5
+
+    vendor_distribution:
+      fortinet: 30
+      cisco: 25
+      crowdstrike: 25
+      okta: 15
+      snort: 3
+      suricata: 2
+
+    time_distribution:
+      business_hours: 70
+      after_hours: 20
+      overnight: 10
+
+    normal_traffic_patterns:
+      web_browsing:
+        frequency: 40
+        vendors: ["fortinet", "cisco", "crowdstrike", "okta"]
+        patterns:
+          - "HTTP/HTTPS to business sites"
+          - "Office 365/Google Workspace"
+          - "Video conferencing (Zoom/Teams)"
+          - "File sharing (OneDrive/Dropbox)"
+          - "Social media platforms"
+          - "E-commerce sites"
+      email_communication:
+        frequency: 20
+        vendors: ["cisco", "fortinet"]
+        patterns:
+          - "SMTP/IMAP traffic"
+          - "Email attachments"
+          - "Calendar synchronization"
+          - "Contact management"
+      file_transfers:
+        frequency: 15
+        vendors: ["crowdstrike", "fortinet"]
+        patterns:
+          - "FTP/SFTP transfers"
+          - "SMB file sharing"
+          - "Cloud storage sync"
+          - "Document collaboration"
+      authentication:
+        frequency: 10
+        vendors: ["okta", "crowdstrike"]
+        patterns:
+          - "SSO authentication"
+          - "MFA challenges"
+          - "Password resets"
+          - "Session management"
+      system_maintenance:
+        frequency: 5
+        vendors: ["crowdstrike", "fortinet"]
+        patterns:
+          - "Windows updates"
+          - "Antivirus updates"
+          - "System backups"
+          - "Software installations"
+
+    malicious_traffic_patterns:
+      reconnaissance:
+        frequency: 3
+        vendors: ["snort", "suricata", "fortinet"]
+        patterns:
+          - "Port scanning"
+          - "Service enumeration"
+          - "Network mapping"
+          - "Vulnerability scanning"
+      initial_access:
+        frequency: 1
+        vendors: ["fortinet", "crowdstrike"]
+        patterns:
+          - "Phishing attempts"
+          - "Exploit attempts"
+          - "Credential stuffing"
+          - "Social engineering"
+      lateral_movement:
+        frequency: 1
+        vendors: ["snort", "suricata", "crowdstrike"]
+        patterns:
+          - "SMB exploitation"
+          - "RDP brute force"
+          - "Pass-the-hash attacks"
+          - "Privilege escalation"
+
+  lestrade_integration:
+    enabled: true
+    user_agent_correlation: true
+    time_synchronization: true
+    session_tracking: true
+    
+    web_traffic_mapping:
+      fortinet:
+        - "Web filtering logs"
+        - "URL categorization"
+        - "Threat detection"
+      cisco:
+        - "Web security logs"
+        - "Firewall logs"
+        - "IPS alerts"
+      crowdstrike:
+        - "Browser activity"
+        - "Endpoint detection"
+        - "Process monitoring"
+      okta:
+        - "SSO authentication"
+        - "User sessions"
+        - "Access logs"
+      zeek:
+        - "HTTP traffic analysis"
+        - "Network flows"
+        - "Protocol analysis"
+    
+    user_profile_mapping:
+      business_professional:
+        primary_sites: ["mail.google.com", "office.com", "slack.com", "salesforce.com"]
+        typical_behavior: "Regular business hours, professional sites, productivity tools"
+      tech_enthusiast:
+        primary_sites: ["github.com", "stackoverflow.com", "reddit.com", "techcrunch.com"]
+        typical_behavior: "Extended hours, technical sites, gaming, social media"
+      student:
+        primary_sites: ["canvas.instructure.com", "google.com", "youtube.com", "spotify.com"]
+        typical_behavior: "Variable hours, educational sites, entertainment, social media"
+      retail_shopper:
+        primary_sites: ["amazon.com", "ebay.com", "walmart.com", "target.com"]
+        typical_behavior: "Shopping-focused, e-commerce sites, product research"
+      news_reader:
+        primary_sites: ["cnn.com", "bbc.com", "reuters.com", "nytimes.com"]
+        typical_behavior: "Regular news consumption, information gathering, current events"
+
+  ntp_configuration:
+    enabled: true
+    primary_ntp_server: "192.168.1.3"
+    secondary_ntp_servers: ["time.google.com", "pool.ntp.org"]
+    sync_interval: 300  # 5 minutes
+    drift_threshold: 1.0  # 1 second
+
+  library_architecture:
+    enabled: true
+    modular_design: true
+    event_queue_size: 1000
+    max_concurrent_sessions: 50
+    session_timeout: 3600  # 1 hour
+    
+    class_structure:
+      - "BakerStreetTrafficOrchestrator"
+      - "LestradeInterface"
+      - "WebTrafficToSyslogMapper"
+      - "EnhancedDevice"
+      - "EventQueue"
+      - "TimeSynchronizer" 

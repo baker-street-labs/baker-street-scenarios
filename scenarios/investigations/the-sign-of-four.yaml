@@ -1,0 +1,233 @@
+# The Sign of Four - Investigation Scenario
+# MITRE ATT&CK: Watering Hole, Social Engineering, Supply Chain
+
+apiVersion: baker-street-labs/v1
+kind: InvestigationScenario
+metadata:
+  name: the-sign-of-four
+  namespace: baker-street-scenarios
+  labels:
+    app: investigation-scenario
+    project: baker-street-labs
+    difficulty: intermediate
+    mitre-tactics:
+      - watering-hole
+      - social-engineering
+      - supply-chain
+      - initial-access
+spec:
+  scenario:
+    title: "The Sign of Four"
+    description: |
+      A sophisticated threat actor has compromised a trusted software vendor and is distributing
+      malicious updates to multiple organizations. The attackers are using a watering hole attack
+      combined with social engineering to gain initial access and establish persistence.
+      
+      Based on Arthur Conan Doyle's "The Sign of Four" - where a mysterious treasure hunt involves
+      multiple parties and complex relationships, this scenario involves multiple attack vectors and
+      sophisticated coordination between different threat actors.
+    
+    objectives:
+      - "Identify the watering hole attack vector"
+      - "Detect supply chain compromise"
+      - "Analyze social engineering techniques"
+      - "Prevent further infections"
+      - "Coordinate with affected organizations"
+    
+    duration: "3-4 hours"
+    difficulty: "Intermediate"
+    participants: "2-4 investigators"
+  
+  mitre_attack:
+    tactics:
+      - TA0001: Initial Access
+      - TA0002: Execution
+      - TA0003: Persistence
+      - TA0004: Privilege Escalation
+      - TA0005: Defense Evasion
+      - TA0006: Credential Access
+      - TA0007: Discovery
+      - TA0008: Lateral Movement
+    
+    techniques:
+      - T1189: Drive-by Compromise
+      - T1195: Supply Chain Compromise
+      - T1566: Phishing
+      - T1059: Command and Scripting Interpreter
+      - T1053: Scheduled Task/Job
+      - T1078: Valid Accounts
+      - T1083: File and Directory Discovery
+      - T1021: Remote Services
+    
+    procedures:
+      - "T1189: Drive-by Compromise - Watering hole attack on vendor website"
+      - "T1195.002: Compromise Software Supply Chain - Malicious software updates"
+      - "T1566.001: Spearphishing Attachment - Social engineering emails"
+      - "T1059.001: PowerShell - Command execution via PowerShell"
+      - "T1053.005: Scheduled Task - Persistence via scheduled tasks"
+      - "T1078.003: Local Accounts - Local account compromise"
+  
+  targets:
+    windows:
+      - name: "vendor-website-01"
+        role: "Compromised Vendor Website"
+        vulnerabilities:
+          - "SQL injection vulnerabilities"
+          - "Cross-site scripting (XSS)"
+          - "Weak authentication"
+      
+      - name: "client-workstation-01"
+        role: "Infected Client Workstation"
+        vulnerabilities:
+          - "Outdated software"
+          - "Weak endpoint protection"
+          - "Privileged user account"
+      
+      - name: "client-server-01"
+        role: "Compromised Client Server"
+        vulnerabilities:
+          - "Default configurations"
+          - "Weak access controls"
+          - "Unpatched vulnerabilities"
+    
+    linux:
+      - name: "vendor-update-server"
+        role: "Compromised Update Server"
+        vulnerabilities:
+          - "Weak access controls"
+          - "Insufficient monitoring"
+          - "Default configurations"
+    
+    network:
+      - name: "vendor-network"
+        role: "Vendor Network"
+        vulnerabilities:
+          - "Weak network segmentation"
+          - "Insufficient monitoring"
+          - "Default network policies"
+  
+  attackers:
+    social_engineering:
+      - name: "the-sign-threat-actor"
+        tools:
+          - "Custom phishing emails"
+          - "Fake vendor websites"
+          - "Social media reconnaissance"
+        techniques:
+          - "Spearphishing campaigns"
+          - "Watering hole attacks"
+          - "Social engineering"
+    
+    malware:
+      - name: "supply-chain-malware"
+        sophistication: "Medium"
+        capabilities:
+          - "Custom malware development"
+          - "Evasion techniques"
+          - "Persistence mechanisms"
+  
+  pan_products:
+    cortex_xdr:
+      - "Endpoint detection and response"
+      - "Behavioral analytics"
+      - "Threat hunting capabilities"
+    
+    pan_os:
+      - "Web filtering and security"
+      - "Threat prevention"
+      - "URL filtering"
+    
+    cortex_xsiam:
+      - "AI-powered security analytics"
+      - "Real-time threat detection"
+      - "Automated response"
+    
+    wildfire:
+      - "Malware analysis"
+      - "Threat intelligence"
+      - "Behavioral analysis"
+    
+    prisma_cloud:
+      - "Supply chain security"
+      - "Container security"
+      - "Cloud security"
+  
+  investigation_phases:
+    phase_1:
+      name: "Watering Hole Detection"
+      duration: "1 hour"
+      objectives:
+        - "Identify compromised vendor website"
+        - "Detect malicious downloads"
+        - "Analyze attack vector"
+      tools:
+        - "PAN-OS for web filtering"
+        - "Cortex XSIAM for correlation"
+        - "WildFire for malware analysis"
+    
+    phase_2:
+      name: "Supply Chain Analysis"
+      duration: "1 hour"
+      objectives:
+        - "Analyze supply chain compromise"
+        - "Identify affected organizations"
+        - "Coordinate with vendor"
+      tools:
+        - "Prisma Cloud for supply chain security"
+        - "Cortex XSIAM for threat intelligence"
+        - "Documentation tools"
+    
+    phase_3:
+      name: "Social Engineering Investigation"
+      duration: "1 hour"
+      objectives:
+        - "Analyze social engineering techniques"
+        - "Identify phishing campaigns"
+        - "Document attack patterns"
+      tools:
+        - "Cortex XSIAM for email analysis"
+        - "PAN-OS for email security"
+        - "Social media monitoring tools"
+    
+    phase_4:
+      name: "Infection Containment"
+      duration: "1 hour"
+      objectives:
+        - "Contain infected systems"
+        - "Remove malicious software"
+        - "Prevent further spread"
+      tools:
+        - "Cortex XDR for endpoint containment"
+        - "PAN-OS for network isolation"
+        - "Cortex XSIAM for automated response"
+  
+  success_metrics:
+    detection:
+      - "Detect watering hole attack within 30 minutes"
+      - "Identify supply chain compromise within 1 hour"
+      - "Prevent 95% of malicious downloads"
+    
+    response:
+      - "Contain threat within 2 hours"
+      - "Remove all malicious software"
+      - "Coordinate with affected organizations"
+    
+    learning:
+      - "Document supply chain attack techniques"
+      - "Identify social engineering patterns"
+      - "Share findings with security community"
+  
+  debrief:
+    questions:
+      - "How quickly was the watering hole attack detected?"
+      - "What techniques were most effective for supply chain compromise?"
+      - "How well did PAN products detect the threat?"
+      - "What improvements are needed for supply chain security?"
+      - "How can we better coordinate with vendors?"
+    
+    recommendations:
+      - "Implement supply chain security controls"
+      - "Enhance web filtering capabilities"
+      - "Improve vendor security assessments"
+      - "Strengthen social engineering awareness"
+      - "Establish vendor security requirements" 

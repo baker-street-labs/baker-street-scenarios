@@ -1,0 +1,243 @@
+# The Adventure of the Final Problem - Investigation Scenario
+# MITRE ATT&CK: Advanced Persistent Threat, Zero-Day Exploits, Nation-State
+
+apiVersion: baker-street-labs/v1
+kind: InvestigationScenario
+metadata:
+  name: the-adventure-of-the-final-problem
+  namespace: baker-street-scenarios
+  labels:
+    app: investigation-scenario
+    project: baker-street-labs
+    difficulty: expert
+    mitre-tactics:
+      - advanced-persistent-threat
+      - zero-day-exploits
+      - nation-state
+      - sophisticated-malware
+spec:
+  scenario:
+    title: "The Adventure of the Final Problem"
+    description: |
+      A sophisticated nation-state threat actor has deployed advanced persistent threat (APT) capabilities
+      using zero-day exploits and custom malware. The attackers have established long-term persistence
+      and are conducting espionage activities while evading detection through advanced techniques.
+      
+      Based on Arthur Conan Doyle's "The Final Problem" - where Holmes faces his greatest adversary
+      Professor Moriarty in a final confrontation, this scenario represents the ultimate challenge where
+      the most sophisticated threat actor meets the most advanced security defenses.
+    
+    objectives:
+      - "Detect sophisticated APT activities"
+      - "Identify zero-day exploit usage"
+      - "Analyze nation-state techniques"
+      - "Prevent data exfiltration"
+      - "Coordinate with intelligence agencies"
+    
+    duration: "6-8 hours"
+    difficulty: "Expert"
+    participants: "4-6 investigators"
+  
+  mitre_attack:
+    tactics:
+      - TA0001: Initial Access
+      - TA0002: Execution
+      - TA0003: Persistence
+      - TA0004: Privilege Escalation
+      - TA0005: Defense Evasion
+      - TA0006: Credential Access
+      - TA0007: Discovery
+      - TA0008: Lateral Movement
+      - TA0009: Collection
+      - TA0010: Exfiltration
+      - TA0011: Command and Control
+    
+    techniques:
+      - T1195: Supply Chain Compromise
+      - T1059: Command and Scripting Interpreter
+      - T1053: Scheduled Task/Job
+      - T1055: Process Injection
+      - T1070: Indicator Removal on Host
+      - T1003: OS Credential Dumping
+      - T1083: File and Directory Discovery
+      - T1021: Remote Services
+      - T1113: Screen Capture
+      - T1041: Exfiltration Over C2 Channel
+      - T1071: Application Layer Protocol
+    
+    procedures:
+      - "T1195.002: Compromise Software Supply Chain - Zero-day in trusted software"
+      - "T1059.001: PowerShell - Living-off-the-land techniques"
+      - "T1053.005: Scheduled Task - Advanced persistence mechanisms"
+      - "T1055.001: Process Injection - Memory-only malware"
+      - "T1070.001: Clear Windows Event Logs - Advanced evasion"
+      - "T1003.001: LSASS Memory - Credential harvesting"
+  
+  targets:
+    windows:
+      - name: "critical-infrastructure-01"
+        role: "Critical Infrastructure System"
+        vulnerabilities:
+          - "Zero-day vulnerabilities"
+          - "Advanced evasion techniques"
+          - "Sophisticated malware"
+      
+      - name: "research-lab-01"
+        role: "Research Laboratory System"
+        vulnerabilities:
+          - "Intellectual property theft"
+          - "Advanced persistent threat"
+          - "Nation-state techniques"
+      
+      - name: "executive-workstation-01"
+        role: "Executive Workstation"
+        vulnerabilities:
+          - "High-value target"
+          - "Sensitive data access"
+          - "Privileged user account"
+    
+    linux:
+      - name: "research-server-01"
+        role: "Research Server"
+        vulnerabilities:
+          - "Advanced malware"
+          - "Zero-day exploits"
+          - "Sophisticated evasion"
+    
+    network:
+      - name: "critical-network"
+        role: "Critical Infrastructure Network"
+        vulnerabilities:
+          - "Advanced network attacks"
+          - "Sophisticated evasion"
+          - "Nation-state capabilities"
+  
+  attackers:
+    apt_simulations:
+      - name: "moriarty-apt"
+        sophistication: "Very High"
+        capabilities:
+          - "Zero-day exploit development"
+          - "Advanced malware development"
+          - "Nation-state resources"
+          - "Sophisticated evasion techniques"
+    
+    malware:
+      - name: "advanced-malware"
+        sophistication: "Very High"
+        capabilities:
+          - "Memory-only execution"
+          - "Advanced evasion techniques"
+          - "Zero-day exploits"
+          - "Sophisticated persistence"
+  
+  pan_products:
+    cortex_xdr:
+      - "Advanced endpoint detection and response"
+      - "Behavioral analytics"
+      - "Threat hunting capabilities"
+      - "Memory analysis"
+    
+    pan_os:
+      - "Advanced threat prevention"
+      - "Network traffic analysis"
+      - "Threat intelligence"
+      - "Zero-day protection"
+    
+    cortex_xsiam:
+      - "AI-powered security analytics"
+      - "Real-time threat detection"
+      - "Automated response"
+      - "Advanced correlation"
+    
+    wildfire:
+      - "Advanced malware analysis"
+      - "Threat intelligence"
+      - "Behavioral analysis"
+      - "Zero-day detection"
+    
+    cortex_xpanse:
+      - "Attack surface management"
+      - "Asset discovery"
+      - "Vulnerability assessment"
+      - "Risk prioritization"
+  
+  investigation_phases:
+    phase_1:
+      name: "Advanced Threat Detection"
+      duration: "2 hours"
+      objectives:
+        - "Detect sophisticated APT activities"
+        - "Identify zero-day exploit usage"
+        - "Analyze advanced evasion techniques"
+      tools:
+        - "Cortex XSIAM for advanced correlation"
+        - "Cortex XDR for behavioral analysis"
+        - "WildFire for advanced malware analysis"
+    
+    phase_2:
+      name: "Nation-State Analysis"
+      duration: "2 hours"
+      objectives:
+        - "Analyze nation-state techniques"
+        - "Identify threat actor attribution"
+        - "Coordinate with intelligence agencies"
+      tools:
+        - "Cortex XSIAM for threat intelligence"
+        - "Cortex Xpanse for attack surface analysis"
+        - "Intelligence sharing platforms"
+    
+    phase_3:
+      name: "Advanced Persistence Analysis"
+      duration: "2 hours"
+      objectives:
+        - "Identify advanced persistence mechanisms"
+        - "Analyze memory-only malware"
+        - "Document sophisticated techniques"
+      tools:
+        - "Cortex XDR for memory analysis"
+        - "PAN-OS for network analysis"
+        - "Advanced forensics tools"
+    
+    phase_4:
+      name: "Intelligence Coordination"
+      duration: "2 hours"
+      objectives:
+        - "Coordinate with intelligence agencies"
+        - "Share threat intelligence"
+        - "Implement advanced defenses"
+      tools:
+        - "Cortex XSIAM for intelligence sharing"
+        - "Threat intelligence platforms"
+        - "Government coordination channels"
+  
+  success_metrics:
+    detection:
+      - "Detect APT activities within 1 hour"
+      - "Identify zero-day exploits within 2 hours"
+      - "Prevent 95% of advanced attacks"
+    
+    response:
+      - "Contain threat within 4 hours"
+      - "Coordinate with intelligence agencies"
+      - "Implement advanced defenses"
+    
+    learning:
+      - "Document nation-state techniques"
+      - "Share threat intelligence"
+      - "Improve advanced detection capabilities"
+  
+  debrief:
+    questions:
+      - "How quickly were the APT activities detected?"
+      - "What zero-day exploits were identified?"
+      - "How effective were the advanced detection techniques?"
+      - "What coordination was needed with intelligence agencies?"
+      - "What lessons can be applied to real nation-state threats?"
+    
+    recommendations:
+      - "Implement advanced threat detection"
+      - "Enhance intelligence sharing"
+      - "Improve zero-day detection"
+      - "Strengthen nation-state defenses"
+      - "Coordinate with government agencies" 

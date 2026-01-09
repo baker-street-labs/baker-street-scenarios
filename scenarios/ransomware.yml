@@ -1,0 +1,77 @@
+# Ransomware Attack Simulation
+# Typical ransomware infection chain
+
+name: ransomware
+description: "Ransomware attack simulation - encryption and data destruction"
+version: "1.0"
+duration: 2h
+intensity: critical
+
+stages:
+  - name: phishing_delivery
+    duration: 10m
+    vendors:
+      fortinet:
+        events_per_hour: 100
+        event_types:
+          - antispam
+          - webfilter
+      
+  - name: execution
+    duration: 5m
+    vendors:
+      crowdstrike:
+        events_per_hour: 500
+        detections:
+          - malicious_process
+          - suspicious_network
+          - credential_theft
+      ossec:
+        events_per_hour: 300
+        categories:
+          - "Malware Detection"
+          - "File Integrity Monitoring"
+          
+  - name: encryption
+    duration: 1h
+    vendors:
+      ossec:
+        events_per_hour: 2000
+        categories:
+          - "File Integrity Monitoring"
+      crowdstrike:
+        events_per_hour: 1000
+        detections:
+          - ransomware_activity
+          - mass_file_modification
+          
+  - name: c2_communication
+    duration: 45m
+    vendors:
+      zeek:
+        events_per_hour: 200
+        log_types:
+          - dns
+          - http
+          - ssl
+      snort:
+        events_per_hour: 300
+        signatures:
+          - c2_beacon
+          - data_exfiltration
+
+# High severity throughout
+severity_override:
+  default: critical
+  
+# Generate IOCs for blocking
+generate_iocs: true
+auto_update_edl: true
+
+# Alert immediately
+real_time_alerts: true
+alert_channels:
+  - email
+  - webhook
+  - sms
+

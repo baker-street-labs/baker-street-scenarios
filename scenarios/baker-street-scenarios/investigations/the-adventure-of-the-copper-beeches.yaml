@@ -1,0 +1,243 @@
+# The Adventure of the Copper Beeches - Investigation Scenario
+# MITRE ATT&CK: Ransomware, Data Destruction, Financial Motivation
+
+apiVersion: baker-street-labs/v1
+kind: InvestigationScenario
+metadata:
+  name: the-adventure-of-the-copper-beeches
+  namespace: baker-street-scenarios
+  labels:
+    app: investigation-scenario
+    project: baker-street-labs
+    difficulty: intermediate
+    mitre-tactics:
+      - ransomware
+      - data-destruction
+      - financial-motivation
+      - impact
+spec:
+  scenario:
+    title: "The Adventure of the Copper Beeches"
+    description: |
+      A financially motivated threat actor has deployed ransomware across a corporate network,
+      encrypting critical data and demanding payment. The attackers are using sophisticated
+      techniques to maximize impact and pressure the organization into paying the ransom.
+      
+      Based on Arthur Conan Doyle's "The Adventure of the Copper Beeches" - where a governess
+      is hired under suspicious circumstances and discovers a sinister plot, this scenario involves
+      deception and hidden motives, where the apparent threat (ransomware) masks deeper objectives.
+    
+    objectives:
+      - "Detect ransomware deployment"
+      - "Prevent data encryption"
+      - "Analyze financial motivation"
+      - "Recover encrypted data"
+      - "Prevent future attacks"
+    
+    duration: "3-4 hours"
+    difficulty: "Intermediate"
+    participants: "2-4 investigators"
+  
+  mitre_attack:
+    tactics:
+      - TA0001: Initial Access
+      - TA0002: Execution
+      - TA0003: Persistence
+      - TA0004: Privilege Escalation
+      - TA0005: Defense Evasion
+      - TA0006: Credential Access
+      - TA0007: Discovery
+      - TA0008: Lateral Movement
+      - TA0009: Collection
+      - TA0040: Impact
+    
+    techniques:
+      - T1190: Exploit Public-Facing Application
+      - T1059: Command and Scripting Interpreter
+      - T1053: Scheduled Task/Job
+      - T1078: Valid Accounts
+      - T1083: File and Directory Discovery
+      - T1021: Remote Services
+      - T1486: Data Encrypted for Impact
+      - T1489: Service Stop
+      - T1490: Inhibit System Recovery
+      - T1491: Defacement
+    
+    procedures:
+      - "T1190: Exploit Public-Facing Application - Initial access via web vulnerability"
+      - "T1059.001: PowerShell - Ransomware deployment via PowerShell"
+      - "T1053.005: Scheduled Task - Persistence via scheduled tasks"
+      - "T1078.003: Local Accounts - Local account compromise"
+      - "T1486.001: Data Encrypted for Impact - File encryption"
+      - "T1490: Inhibit System Recovery - Disable recovery mechanisms"
+  
+  targets:
+    windows:
+      - name: "web-server-01"
+        role: "Public Web Server"
+        vulnerabilities:
+          - "SQL injection vulnerability"
+          - "Weak authentication"
+          - "Default configurations"
+      
+      - name: "fileserver-01"
+        role: "File Server"
+        vulnerabilities:
+          - "Excessive file permissions"
+          - "Unrestricted file sharing"
+          - "Weak access controls"
+      
+      - name: "backup-server-01"
+        role: "Backup Server"
+        vulnerabilities:
+          - "Weak backup security"
+          - "Default configurations"
+          - "Insufficient monitoring"
+    
+    linux:
+      - name: "database-server-01"
+        role: "Database Server"
+        vulnerabilities:
+          - "Default database credentials"
+          - "Weak access controls"
+          - "Unpatched vulnerabilities"
+    
+    network:
+      - name: "corporate-network"
+        role: "Corporate Network"
+        vulnerabilities:
+          - "Weak network segmentation"
+          - "Insufficient monitoring"
+          - "Default network policies"
+  
+  attackers:
+    malware:
+      - name: "copper-beeches-ransomware"
+        sophistication: "Medium"
+        capabilities:
+          - "File encryption"
+          - "Data exfiltration"
+          - "Recovery prevention"
+          - "Ransom demand"
+    
+    red_teams:
+      - name: "financial-threat-actor"
+        tools:
+          - "Custom ransomware"
+          - "Exploitation tools"
+          - "Persistence mechanisms"
+        techniques:
+          - "Ransomware deployment"
+          - "Data encryption"
+          - "Financial extortion"
+  
+  pan_products:
+    cortex_xdr:
+      - "Endpoint detection and response"
+      - "Behavioral analytics"
+      - "Threat hunting capabilities"
+      - "Ransomware protection"
+    
+    pan_os:
+      - "Network traffic analysis"
+      - "Threat prevention"
+      - "URL filtering"
+      - "Ransomware detection"
+    
+    cortex_xsiam:
+      - "AI-powered security analytics"
+      - "Real-time threat detection"
+      - "Automated response"
+      - "Ransomware correlation"
+    
+    wildfire:
+      - "Malware analysis"
+      - "Threat intelligence"
+      - "Behavioral analysis"
+      - "Ransomware analysis"
+    
+    cortex_xsoar:
+      - "Security orchestration"
+      - "Automated response"
+      - "Incident management"
+      - "Ransomware containment"
+  
+  investigation_phases:
+    phase_1:
+      name: "Ransomware Detection"
+      duration: "1 hour"
+      objectives:
+        - "Detect ransomware deployment"
+        - "Identify encryption activities"
+        - "Analyze attack vector"
+      tools:
+        - "Cortex XDR for endpoint detection"
+        - "PAN-OS for network analysis"
+        - "Cortex XSIAM for correlation"
+    
+    phase_2:
+      name: "Impact Assessment"
+      duration: "1 hour"
+      objectives:
+        - "Assess data encryption impact"
+        - "Identify affected systems"
+        - "Evaluate recovery options"
+      tools:
+        - "Cortex XSIAM for impact analysis"
+        - "Backup system analysis"
+        - "Data recovery tools"
+    
+    phase_3:
+      name: "Containment and Recovery"
+      duration: "1 hour"
+      objectives:
+        - "Contain ransomware spread"
+        - "Prevent further encryption"
+        - "Initiate recovery procedures"
+      tools:
+        - "Cortex XDR for endpoint containment"
+        - "PAN-OS for network isolation"
+        - "Cortex XSOAR for automated response"
+    
+    phase_4:
+      name: "Financial Analysis"
+      duration: "1 hour"
+      objectives:
+        - "Analyze financial motivation"
+        - "Track cryptocurrency payments"
+        - "Coordinate with law enforcement"
+      tools:
+        - "Cortex XSIAM for threat intelligence"
+        - "Cryptocurrency tracking tools"
+        - "Law enforcement coordination"
+  
+  success_metrics:
+    detection:
+      - "Detect ransomware deployment within 15 minutes"
+      - "Prevent 90% of file encryption"
+      - "Identify attack vector within 30 minutes"
+    
+    response:
+      - "Contain ransomware within 1 hour"
+      - "Recover 95% of encrypted data"
+      - "Prevent ransom payment"
+    
+    learning:
+      - "Document ransomware techniques"
+      - "Improve backup security"
+      - "Enhance ransomware protection"
+  
+  debrief:
+    questions:
+      - "How quickly was the ransomware detected?"
+      - "What techniques were used for deployment?"
+      - "How effective were the containment measures?"
+      - "What improvements are needed for ransomware protection?"
+      - "How can we prevent future ransomware attacks?"
+    
+    recommendations:
+      - "Implement ransomware protection"
+      - "Enhance backup security"
+      - "Improve endpoint detection"
+      - "Strengthen network segmentation"
+      - "Conduct regular security assessments" 
